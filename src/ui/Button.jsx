@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
+import { colors, borderRadius } from '@/styles/constants'
 
 const sizes = {
   small: css`
@@ -17,33 +18,44 @@ const sizes = {
     font-size: 1.6rem;
     padding: 1.2rem 2.4rem;
     font-weight: 500;
-  `,
-};
+  `
+}
 
 const variations = {
   primary: css`
-    color: var(--color-brand-50);
-    background-color: var(--color-brand-600);
+    color: ${colors['brand-50']};
+    background-color: ${colors['brand-600']};
 
     &:hover {
-      background-color: var(--color-brand-700);
+      background-color: ${colors['brand-700']};
     }
   `,
   secondary: css`
-    color: var(--color-grey-600);
-    background: var(--color-grey-0);
-    border: 1px solid var(--color-grey-200);
+    color: ${colors['grey-600']};
+    background: ${colors['grey-0']};
+    border: 1px solid ${colors['grey-200']};
 
     &:hover {
-      background-color: var(--color-grey-50);
+      background-color: ${colors['grey-50']};
     }
   `,
   danger: css`
-    color: var(--color-red-100);
-    background-color: var(--color-red-700);
+    color: ${colors['red-100']};
+    background-color: ${colors['red-700']};
 
     &:hover {
-      background-color: var(--color-red-800);
+      background-color: ${colors['red-800']};
     }
-  `,
-};
+  `
+}
+
+const Button = styled.button`
+  border: none;
+  border-radius: ${borderRadius.md};
+  cursor: pointer;
+
+  ${props => sizes[props.size] || sizes.medium}
+  ${props => variations[props.variation] || variations.primary}
+`
+
+export default Button
