@@ -1,49 +1,54 @@
 export const colors = {
-  brand50: "var(--color-brand-50)",
-  brand100: "var(--color-brand-100)",
-  brand200: "var(--color-brand-200)",
-  brand500: "var(--color-brand-500)",
-  brand600: "var(--color-brand-600)",
-  brand700: "var(--color-brand-700)",
-  brand800: "var(--color-brand-800)",
-  brand900: "var(--color-brand-900)",
-  
-  grey0: "var(--color-grey-0)",
-  grey50: "var(--color-grey-50)",
-  grey100: "var(--color-grey-100)",
-  grey200: "var(--color-grey-200)",
-  grey300: "var(--color-grey-300)",
-  grey400: "var(--color-grey-400)",
-  grey500: "var(--color-grey-500)",
-  grey600: "var(--color-grey-600)",
-  grey700: "var(--color-grey-700)",
-  grey800: "var(--color-grey-800)",
-  grey900: "var(--color-grey-900)",
-  
-  blue100: "var(--color-blue-100)",
-  blue700: "var(--color-blue-700)",
-  green100: "var(--color-green-100)",
-  green700: "var(--color-green-700)",
-  yellow100: "var(--color-yellow-100)",
-  yellow700: "var(--color-yellow-700)",
-  silver100: "var(--color-silver-100)",
-  silver700: "var(--color-silver-700)",
-  indigo100: "var(--color-indigo-100)",
-  indigo700: "var(--color-indigo-700)",
-  red100: "var(--color-red-100)",
-  red700: "var(--color-red-700)",
-  red800: "var(--color-red-800)",
+  'brand-50': '#eef2ff',
+  'brand-100': '#e0e7ff',
+  'brand-200': '#c7d2fe',
+  'brand-500': '#6366f1',
+  'brand-600': '#4f46e5',
+  'brand-700': '#4338ca',
+  'brand-800': '#3730a3',
+  'brand-900': '#312e81',
+
+  'grey-0': '#fff',
+  'grey-50': '#f9fafb',
+  'grey-100': '#f3f4f6',
+  'grey-200': '#e5e7eb',
+  'grey-300': '#d1d5db',
+  'grey-400': '#9ca3af',
+  'grey-500': '#6b7280',
+  'grey-600': '#4b5563',
+  'grey-700': '#374151',
+  'grey-800': '#1f2937',
+  'grey-900': '#111827',
+
+  'blue-100': '#e0f2fe',
+  'blue-700': '#0369a1',
+  'green-100': '#dcfce7',
+  'green-700': '#15803d',
+  'yellow-100': '#fef9c3',
+  'yellow-700': '#a16207',
+  'silver-100': '#e5e7eb',
+  'silver-700': '#374151',
+  'indigo-100': '#e0e7ff',
+  'indigo-700': '#4338ca',
+  'red-100': '#fee2e2',
+  'red-700': '#b91c1c',
+  'red-800': '#991b1b'
 }
 
 export const shadows = {
-  sm: "var(--shadow-sm)",
-  md: "var(--shadow-md)",
-  lg: "var(--shadow-lg)",
+  sm: '0 1px 2px rgba(0, 0, 0, 0.04)',
+  md: '0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06)',
+  lg: '0 2.4rem 3.2rem rgba(0, 0, 0, 0.12)'
 }
 
 export const borderRadius = {
-  tiny: "var(--border-radius-tiny)",
-  sm: "var(--border-radius-sm)",
-  md: "var(--border-radius-md)",
-  lg: "var(--border-radius-lg)",
+  tiny: '3px',
+  sm: '5px',
+  md: '7px',
+  lg: '9px'
+}
+
+export const others = {
+  'image-grayscale': '0',
+  'image-opacity': '100%'
 }
