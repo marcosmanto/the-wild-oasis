@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { colors } from '@/styles/constants'
 
 const StyledTodayItem = styled.li`
   display: grid;
@@ -8,13 +9,13 @@ const StyledTodayItem = styled.li`
 
   font-size: 1.4rem;
   padding: 0.8rem 0;
-  border-bottom: 1px solid var(--color-grey-100);
+  border-bottom: 1px solid ${colors['grey-100']};
 
   &:first-child {
-    border-top: 1px solid var(--color-grey-100);
+    border-top: 1px solid ${colors['grey-100']};
   }
-`;
+`
 
 const Guest = styled.div`
   font-weight: 500;
-`;
+`

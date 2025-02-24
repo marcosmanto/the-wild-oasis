@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { colors } from '@/styles/constants'
 
 const Tag = styled.span`
   width: fit-content;
@@ -7,10 +8,8 @@ const Tag = styled.span`
   font-weight: 600;
   padding: 0.4rem 1.2rem;
   border-radius: 100px;
+  color: ${props => colors[`${props.type}-700`]};
+  background-color: ${props => colors[`${props.type}-100`]};
+`
 
-  /* Make these dynamic, based on the received prop */
-  color: var(--color-${(props) => props.type}-700);
-  background-color: var(--color-${(props) => props.type}-100);
-`;
-
-export default Tag;
+export default Tag

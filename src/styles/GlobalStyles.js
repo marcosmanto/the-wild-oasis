@@ -1,7 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
-import { colors } from './constants'
+import { colors } from '@/styles/constants'
 
 const GlobalStyles = createGlobalStyle`
+  :root {
+    --color-red-800: #991b1b;
+  }
+
   *,
   *::before,
   *::after {

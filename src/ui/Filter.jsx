@@ -1,27 +1,28 @@
-import styled, { css } from "styled-components";
+import { colors, shadows, borderRadius } from '@/styles/constants'
+import styled, { css } from 'styled-components'
 
 const StyledFilter = styled.div`
-  border: 1px solid var(--color-grey-100);
-  background-color: var(--color-grey-0);
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--border-radius-sm);
+  border: 1px solid ${colors['grey-100']};
+  background-color: ${colors['grey-0']};
+  box-shadow: ${shadows.sm};
+  border-radius: ${borderRadius.sm};
   padding: 0.4rem;
   display: flex;
   gap: 0.4rem;
-`;
+`
 
 const FilterButton = styled.button`
-  background-color: var(--color-grey-0);
+  background-color: ${colors['grey-0']};
   border: none;
 
-  ${(props) =>
+  ${props =>
     props.active &&
     css`
-      background-color: var(--color-brand-600);
-      color: var(--color-brand-50);
+      background-color: ${colors['brand-600']};
+      color: ${colors['brand-50']};
     `}
 
-  border-radius: var(--border-radius-sm);
+  border-radius: ${borderRadius.sm};
   font-weight: 500;
   font-size: 1.4rem;
   /* To give the same height as select */
@@ -29,7 +30,7 @@ const FilterButton = styled.button`
   transition: all 0.3s;
 
   &:hover:not(:disabled) {
-    background-color: var(--color-brand-600);
-    color: var(--color-brand-50);
+    background-color: ${colors['brand-600']};
+    color: ${colors['brand-50']};
   }
-`;
+`

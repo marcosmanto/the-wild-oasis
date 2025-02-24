@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import { borderRadius, colors } from '@/styles/constants'
+import styled from 'styled-components'
 
 export const Flag = styled.img`
   max-width: 2rem;
-  border-radius: var(--border-radius-tiny);
+  border-radius: ${borderRadius.tiny};
   display: block;
-  border: 1px solid var(--color-grey-100);
-`;
+  border: 1px solid ${colors['grey-100']};
+`

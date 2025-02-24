@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { colors } from '@/styles/constants'
+import styled from 'styled-components'
 
 const StyledUserAvatar = styled.div`
   display: flex;
@@ -6,8 +7,8 @@ const StyledUserAvatar = styled.div`
   align-items: center;
   font-weight: 500;
   font-size: 1.4rem;
-  color: var(--color-grey-600);
-`;
+  color: ${colors['grey-600']};
+`
 
 const Avatar = styled.img`
   display: block;
@@ -17,5 +18,5 @@ const Avatar = styled.img`
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
-  outline: 2px solid var(--color-grey-100);
-`;
+  outline: 2px solid ${colors['grey-100']};
+`

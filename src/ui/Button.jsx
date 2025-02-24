@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { colors, borderRadius } from '@/styles/constants'
+import { colors, borderRadius, shadows } from '@/styles/constants'
 
 const sizes = {
   small: css`
@@ -51,11 +51,17 @@ const variations = {
 
 const Button = styled.button`
   border: none;
-  border-radius: ${borderRadius.md};
+  border-radius: ${borderRadius.sm};
+  box-shadow: ${shadows.sm};
   cursor: pointer;
 
-  ${props => sizes[props.size] || sizes.medium}
-  ${props => variations[props.variation] || variations.primary}
+  ${props => sizes[props.size]}
+  ${props => variations[props.variation]}
 `
+
+Button.defaultProps = {
+  size: 'medium',
+  variation: 'primary'
+}
 
 export default Button
