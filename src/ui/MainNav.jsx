@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { colors, borderRadius } from '@/styles/constants'
+import { NavLink } from 'react-router-dom'
+import { HiHomeModern, HiOutlineCalendarDays, HiOutlineCog6Tooth, HiOutlineHome, HiOutlineHomeModern, HiOutlineUser, HiOutlineUsers } from 'react-icons/hi2'
 
 const NavList = styled.ul`
   display: flex;
@@ -7,7 +9,8 @@ const NavList = styled.ul`
   gap: 0.8rem;
 `
 
-const Link = styled.a`
+// Change this to style the NavLink component instead of a regular anchor
+const StyledNavLink = styled(NavLink)`
   &:link,
   &:visited {
     display: flex;
@@ -44,3 +47,44 @@ const Link = styled.a`
     color: ${colors['brand-600']};
   }
 `
+
+function MainNav() {
+  return (
+    <nav>
+      <NavList>
+        <li>
+          <StyledNavLink to="/dashboard">
+            <HiOutlineHome />
+            <span>Home</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/bookings">
+            <HiOutlineCalendarDays />
+            Bookings
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/cabins">
+            <HiOutlineHomeModern />
+            Cabins
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/users">
+            <HiOutlineUsers />
+            Users
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/settings">
+            <HiOutlineCog6Tooth />
+            Settings
+          </StyledNavLink>
+        </li>
+      </NavList>
+    </nav>
+  )
+}
+
+export default MainNav
