@@ -5,8 +5,11 @@ const Row = styled.div`
   ${props =>
     props.type === 'horizontal'
       ? css`
-          justify-content: space-between;
+          ${props.horizontalAlign === 'space-between' && 'justify-content: space-between'};
+          ${props.horizontalAlign === 'center' && 'justify-content: center'};
+          ${props.horizontalAlign === 'right' && 'justify-content: end'};
           align-items: center;
+          gap: 1.6rem;
         `
       : css`
           flex-direction: column;
@@ -15,7 +18,8 @@ const Row = styled.div`
 `
 
 Row.defaultProps = {
-  type: 'vertical'
+  type: 'vertical',
+  horizontalAlign: ''
 }
 
 export default Row
