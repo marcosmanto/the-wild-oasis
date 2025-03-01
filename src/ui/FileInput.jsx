@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors, borderRadius } from '@/styles/constants'
 
-const FileInput = styled.input`
+const FileInput = styled.input.attrs({ type: 'file' })`
   font-size: 1.4rem;
   border-radius: ${borderRadius.sm};
 

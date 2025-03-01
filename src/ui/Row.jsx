@@ -5,9 +5,9 @@ const Row = styled.div`
   ${props =>
     props.type === 'horizontal'
       ? css`
-          ${props.horizontalAlign === 'space-between' && 'justify-content: space-between'};
-          ${props.horizontalAlign === 'center' && 'justify-content: center'};
-          ${props.horizontalAlign === 'right' && 'justify-content: end'};
+          ${props.horizontalalign === 'space-between' && 'justify-content: space-between'};
+          ${props.horizontalalign === 'center' && 'justify-content: center'};
+          ${props.horizontalalign === 'right' && 'justify-content: end'};
           align-items: center;
           gap: 1.6rem;
         `
@@ -19,7 +19,7 @@ const Row = styled.div`
 
 Row.defaultProps = {
   type: 'vertical',
-  horizontalAlign: ''
+  horizontalalign: ''
 }
 
 export default Row
