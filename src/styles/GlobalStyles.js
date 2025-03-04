@@ -26,8 +26,8 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     font-size: 1.6rem;
     overflow-x: auto;
-    overflow-y: hidden;
     overflow-y: -moz-hidden-none;
+    overflow-y: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {
