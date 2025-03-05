@@ -58,32 +58,16 @@ export async function createEditCabin(newCabin, id) {
 }
 
 export async function deleteCabin(id) {
-  // Create an AbortController for timeout
-  const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 2000)
+  // prettier-ignore
+  const { data, error } = await supabase
+    .from('cabins')
+    .delete()
+    .eq('id', id)
 
-  try {
-    const { data, error } = await supabase.from('cabins').delete().eq('id', id).select().abortSignal(controller.signal)
-
-    // Check if data is null or empty array - this indicates no rows were affected
-    if (!error && (!data || data.length === 0)) {
-      throw new Error('Permission denied: Cannot delete cabin')
-    }
-
-    if (error) {
-      throw new Error(error.message)
-    }
-
-    return data
-  } catch (err) {
-    controller.abort()
-    if (err.message?.startsWith('AbortError')) {
-      const timeoutError = new Error('Request timeout')
-      timeoutError.timeout = true
-      throw timeoutError
-    }
-    throw err
-  } finally {
-    clearTimeout(timeoutId)
+  if (error) {
+    console.error(error)
+    throw new Error('Cabin could not be deleted')
   }
+
+  return data
 }
