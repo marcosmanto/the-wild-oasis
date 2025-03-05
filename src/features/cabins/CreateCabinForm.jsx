@@ -24,12 +24,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
   })
   const { errors } = formState
 
-  const { createCabin, isCreating, editCabin, isEditing } = useCreateEditCabin({
-    onSuccess: function () {
-      onCloseForm?.()
-      resetForm()
-    }
-  })
+  const { createCabin, isCreating, editCabin, isEditing } = useCreateEditCabin()
 
   const isWorking = isCreating || isEditing
 
@@ -38,9 +33,16 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
 
     // prettier-ignore
     if (isEditSession)
-      editCabin({ newCabinData: { ...data, image }, id: editId })
+      editCabin({ newCabinData: { ...data, image }, id: editId }, {
+        onSuccess: (data) => {
+          onCloseForm?.()
+          resetForm()
+        }
+      })
     else
-      createCabin({ ...data, image })
+      createCabin({ ...data, image }, {
+        onSuccess: (data) => resetForm()
+      })
   }
 
   function onError(errors) {
