@@ -1,6 +1,3 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
-
 import Input from '@/ui/Input'
 import Form from '@/ui/Form'
 import Button from '@/ui/Button'
@@ -11,7 +8,7 @@ import Row from '@/ui/Row'
 import Spacer from '@/ui/Spacer'
 
 import { useForm } from 'react-hook-form'
-import { createEditCabin } from '@/services/apiCabins'
+import { useCreateEditCabin } from '@/data/cabins/useCreateEditCabin'
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
   const { id: editId, ...editValues } = cabinToEdit
@@ -27,26 +24,11 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
   })
   const { errors } = formState
 
-  const queryClient = useQueryClient()
-
-  const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success('Cabin created')
+  const { createCabin, isCreating, editCabin, isEditing } = useCreateEditCabin({
+    onSuccess: function () {
+      onCloseForm?.()
       resetForm()
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-    },
-    onError: err => toast.error(err.message)
-  })
-
-  const { mutate: editCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success('Cabin successfully edited')
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-      onCloseForm?.() // Call onCloseForm if it exists
-    },
-    onError: err => toast.error(err.message)
+    }
   })
 
   const isWorking = isCreating || isEditing
@@ -62,7 +44,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
   }
 
   function onError(errors) {
-    //console.log(errors)
+    // console.log(errors)
   }
 
   return (
@@ -115,8 +97,8 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
         <Textarea id="description" defaultValue="" disabled={isWorking} {...register('description', { required: 'This field is required' })} />
       </FormRow>
 
-      <FormRow label="Cabin photo">
-        <FileInput id="image" accept="image/*" disabled={isWorking} {...register('image', { required: isEditSession ? false : 'This field is required' })} />
+      <FormRow label="Cabin photo" error={errors?.image?.message}>
+        <FileInput id="image" accept="image/*" disabled={isWorking} {...register('image', { required: isEditSession ? false : 'An image is required' })} />
       </FormRow>
 
       <Spacer />

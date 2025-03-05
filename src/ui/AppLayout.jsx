@@ -15,7 +15,8 @@ const Main = styled.main`
   background-color: ${colors['grey-50']};
   padding: 4rem 4.8rem 6.4rem;
   overflow: auto;
-  min-width: calc(89rem - 26rem);
+  overflow-y: scroll;
+  min-width: calc(100rem - 26rem);
 `
 
 const Container = styled.div`

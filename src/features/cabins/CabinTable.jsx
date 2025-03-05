@@ -12,12 +12,12 @@ const Table = styled.div`
   font-size: 1.4rem;
   background-color: ${colors['grey-0']};
   border-radius: 7px;
-  overflow: hidden;
+  overflow-x: auto;
 `
 
 const TableHeader = styled.header`
   display: grid;
-  grid-template-columns: 6.2rem 1.8fr 2.2fr 1fr 1fr 1fr;
+  grid-template-columns: 6.2rem minmax(50px, 1.8fr) minmax(100px, 2.2fr) minmax(80px, 1fr) minmax(80px, 1fr) minmax(80px, 1fr);
   column-gap: 2.4rem;
   align-items: center;
   background-color: ${colors['grey-50']};
