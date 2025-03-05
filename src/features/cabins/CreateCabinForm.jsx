@@ -8,9 +8,14 @@ import Row from '@/ui/Row'
 import Spacer from '@/ui/Spacer'
 
 import { useForm } from 'react-hook-form'
-import { useCreateEditCabin } from '@/data/cabins/useCreateEditCabin'
+import { useCreateCabin } from '@/features/cabins/useCreateCabin'
+import { useEditCabin } from '@/features/cabins/useEditCabin'
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
+  const { createCabin, isCreating } = useCreateCabin()
+  const { editCabin, isEditing } = useEditCabin()
+  const isWorking = isCreating || isEditing
+
   const { id: editId, ...editValues } = cabinToEdit
   const isEditSession = Boolean(editId)
 
@@ -23,10 +28,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
     defaultValues: isEditSession ? editValues : {}
   })
   const { errors } = formState
-
-  const { createCabin, isCreating, editCabin, isEditing } = useCreateEditCabin()
-
-  const isWorking = isCreating || isEditing
 
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image === null ? '' : data.image[0]
@@ -46,7 +47,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
   }
 
   function onError(errors) {
-    // console.log(errors)
+    console.log(errors)
   }
 
   return (
@@ -60,6 +61,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
           type="number"
           id="maxCapacity"
           min={1}
+          max={32767}
           disabled={isWorking}
           {...register('maxCapacity', {
             required: 'This field is required',
@@ -73,6 +75,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
           type="number"
           id="regularPrice"
           min={0}
+          max={32767}
           disabled={isWorking}
           {...register('regularPrice', {
             required: 'This field is required',
@@ -86,6 +89,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
           type="number"
           id="discount"
           min={0}
+          max={32767}
           defaultValue={0}
           disabled={isWorking}
           {...register('discount', {

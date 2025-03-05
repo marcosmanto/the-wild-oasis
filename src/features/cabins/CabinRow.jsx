@@ -1,4 +1,4 @@
-import { useDeleteCabin } from '@/data/cabins/useDeleteCabin'
+import { useDeleteCabin } from '@/features/cabins/useDeleteCabin'
 import CreateCabinForm from '@/features/cabins/CreateCabinForm'
 import { colors } from '@/styles/constants'
 import { formatCurrency } from '@/utils/helpers'
