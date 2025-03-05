@@ -16,30 +16,34 @@ export async function getCabins() {
 }
 
 export async function createEditCabin(newCabin, id) {
+  // check if the image is already uploaded
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl)
 
+  // generate a random name for the image
   const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll('/', '')
+
+  // generate the image path
   const imagePath = hasImagePath ? newCabin.image : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`
 
   let query = supabase.from('cabins')
 
   if (!id) {
-    // prettier-ignore
-    query = query
-      .insert([{ ...newCabin, image: imagePath }])
+    // create a new cabin
+    query = query.insert([{ ...newCabin, image: imagePath }])
   } else {
-    // prettier-ignore
-    query = query
-      .update({ ...newCabin, image: imagePath })
-      .eq('id', id)
+    // edit an existing cabin
+    query = query.update({ ...newCabin, image: imagePath }).eq('id', id)
   }
 
   const { data, error } = await query.select().single()
 
   if (error) {
     console.error(error)
-    throw new Error('Cabin could not be created')
+    throw new Error(`${id ? 'Cabin could not be edited' : 'Cabin could not be created'}`)
   }
+
+  // avoid upload if the image already exists
+  if (hasImagePath) return data
 
   //Upload image
   const { error: storageError } = await supabase.storage.from('cabin-images').upload(imageName, newCabin.image)
