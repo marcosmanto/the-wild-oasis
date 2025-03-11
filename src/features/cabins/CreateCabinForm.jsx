@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 import { useCreateCabin } from '@/features/cabins/useCreateCabin'
 import { useEditCabin } from '@/features/cabins/useEditCabin'
 
-function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal, onCloseForm }) {
   const { createCabin, isCreating } = useCreateCabin()
   const { editCabin, isEditing } = useEditCabin()
   const isWorking = isCreating || isEditing
@@ -36,13 +36,13 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
     if (isEditSession)
       editCabin({ newCabinData: { ...data, image }, id: editId }, {
         onSuccess: (data) => {
-          onCloseForm?.()
           resetForm()
+          onCloseForm?.()
         }
       })
     else
       createCabin({ ...data, image }, {
-        onSuccess: (data) => resetForm()
+        onSuccess: (data) => onCloseModal?.()
       })
   }
 
@@ -51,7 +51,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? 'modal' : 'regular'}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input disabled={isWorking} type="text" id="name" {...register('name', { required: 'This field is required' })} />
       </FormRow>
@@ -109,7 +109,15 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
 
       <Spacer />
       <Row type="horizontal" horizontalalign="center">
-        <Button disabled={isWorking} variation="secondary" type="reset" onClick={() => resetForm()}>
+        <Button
+          disabled={isWorking}
+          variation="secondary"
+          type="reset"
+          onClick={() => {
+            onCloseForm?.()
+            onCloseModal?.()
+          }}
+        >
           Cancel
         </Button>
         <Button disabled={isWorking}>{isEditSession ? 'Edit cabin' : 'Create cabin'}</Button>

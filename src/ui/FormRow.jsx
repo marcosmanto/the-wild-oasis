@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 import { colors } from '@/styles/constants'
-import Row from './Row'
 
 const StyledFormRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 24rem 1fr;
-  gap: 0rem;
+  grid-template-columns: 1.15fr 2fr 1fr;
+  column-gap: 2rem;
 
   padding: 1.2rem 0;
 
@@ -18,7 +17,9 @@ const StyledFormRow = styled.div`
     padding-bottom: 0;
   }
 
-  &:not(:last-child) {
+  border-bottom: 1px solid ${colors['grey-200']};
+
+  form[type='modal'] & {
     border-bottom: 1px solid ${colors['grey-100']};
   }
 
@@ -34,18 +35,17 @@ const Label = styled.label`
 `
 
 const Error = styled.span`
+  right: 0;
   font-size: 1.4rem;
   color: ${colors['red-700']};
 `
 
 function FormRow({ label, error, children }) {
   return (
-    <StyledFormRow>
+    <StyledFormRow type="form-row">
       {label && <Label htmlFor={children?.props?.id}>{label}</Label>}
-      <Row>
-        {children}
-        {error && <Error>{error}</Error>}
-      </Row>
+      {children}
+      {error && <Error>{error}</Error>}
     </StyledFormRow>
   )
 }
