@@ -60,7 +60,7 @@ export async function createEditCabin(newCabin, id) {
 export async function deleteCabin(id) {
   // Create an AbortController for timeout
   const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 2000)
+  const timeoutId = setTimeout(() => controller.abort(), 10000)
 
   try {
     const { data, error } = await supabase.from('cabins').delete().eq('id', id).select().abortSignal(controller.signal)
