@@ -6,10 +6,10 @@ export function useCreateCabin() {
   const queryClient = useQueryClient()
 
   const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
+    mutationFn: ({ newCabinData, type = 'create' }) => createEditCabin(newCabinData, null, type),
+    onSuccess: (data, { type }) => {
       toast.dismiss('create-cabin')
-      toast.success('Cabin created')
+      toast.success(type === 'duplicate' ? 'Cabin duplicated' : 'Cabin created')
       queryClient.invalidateQueries({ queryKey: ['cabins'] })
     },
     onError: err => {

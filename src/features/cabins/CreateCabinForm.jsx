@@ -41,7 +41,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal, onCloseForm }) {
         }
       })
     else
-      createCabin({ ...data, image }, {
+      createCabin({ newCabinData: { ...data, image } }, {
         onSuccess: (data) => onCloseModal?.()
       })
   }
