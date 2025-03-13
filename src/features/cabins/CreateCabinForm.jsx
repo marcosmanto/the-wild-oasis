@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 import { useCreateCabin } from '@/features/cabins/useCreateCabin'
 import { useEditCabin } from '@/features/cabins/useEditCabin'
 
-function CreateCabinForm({ cabinToEdit = {}, onCloseModal, onCloseForm }) {
+function CreateCabinForm({ cabinToEdit = {}, successAction }) {
   const { createCabin, isCreating } = useCreateCabin()
   const { editCabin, isEditing } = useEditCabin()
   const isWorking = isCreating || isEditing
@@ -37,13 +37,16 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal, onCloseForm }) {
       editCabin({ newCabinData: { ...data, image }, id: editId }, {
         onSuccess: (data) => {
           resetForm()
-          onCloseForm?.()
+          successAction?.()
         }
       })
     else
-      createCabin({ newCabinData: { ...data, image } }, {
-        onSuccess: (data) => onCloseModal?.()
-      })
+      createCabin(
+        { newCabinData: { ...data, image } },
+        {
+          onSuccess: data => successAction?.()
+        }
+      )
   }
 
   function onError(errors) {
@@ -51,7 +54,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal, onCloseForm }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? 'modal' : 'regular'}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input disabled={isWorking} type="text" id="name" {...register('name', { required: 'This field is required' })} />
       </FormRow>
@@ -114,8 +117,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal, onCloseForm }) {
           variation="secondary"
           type="reset"
           onClick={() => {
-            onCloseForm?.()
-            onCloseModal?.()
+            successAction?.()
           }}
         >
           Cancel
