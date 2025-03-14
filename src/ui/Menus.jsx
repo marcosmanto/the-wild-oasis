@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { colors, borderRadius, shadows } from '@/styles/constants'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { HiEllipsisVertical } from 'react-icons/hi2'
 import { createPortal } from 'react-dom'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
@@ -73,6 +73,15 @@ function Menus({ children }) {
   const [position, setPosition] = useState(null)
   const close = () => setOpenId('')
   const open = setOpenId
+
+  useEffect(() => {
+    function handleScroll() {
+      if (openId) close()
+    }
+
+    document.addEventListener('scroll', handleScroll, true)
+    return () => document.removeEventListener('scroll', handleScroll, true)
+  }, [openId])
 
   return <MenusContext.Provider value={{ openId, close, open, position, setPosition }}>{children}</MenusContext.Provider>
 }
