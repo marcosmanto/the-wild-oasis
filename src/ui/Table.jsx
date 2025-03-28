@@ -88,7 +88,7 @@ function Row({ children }) {
 }
 
 function Body({ data, render }) {
-  return <StyledBody>{data.length ? data.map(render) : <Empty>No data to show at the moment</Empty>}</StyledBody>
+  return <StyledBody>{data?.length ? data.map(render) : <Empty>No data to show at the moment</Empty>}</StyledBody>
 }
 
 Table.Header = Header
