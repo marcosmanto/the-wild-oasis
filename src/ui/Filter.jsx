@@ -53,7 +53,7 @@ function Filter({ filterField, options }) {
     setSearchParams(searchParams)
   }
 
-  function isActive(value, isDefault) {
+  function isActive(value) {
     const currentFilter = searchParams.get(filterField)
 
     // If no filter is set, first try to use the default option
@@ -68,7 +68,7 @@ function Filter({ filterField, options }) {
   return (
     <StyledFilter>
       {options.map(option => (
-        <FilterButton key={option.value} onClick={() => handleClick(option.value)} $active={isActive(option.value, option.defaultValue)}>
+        <FilterButton key={option.value} onClick={() => handleClick(option.value)} $active={isActive(option.value)}>
           {option.label}
         </FilterButton>
       ))}
