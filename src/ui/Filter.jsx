@@ -1,5 +1,7 @@
 import { colors, shadows, borderRadius } from '@/styles/constants'
+import { useSearchParams } from 'react-router-dom'
 import styled, { css } from 'styled-components'
+import { useEffect } from 'react'
 
 const StyledFilter = styled.div`
   border: 1px solid ${colors['grey-100']};
@@ -16,7 +18,7 @@ const FilterButton = styled.button`
   border: none;
 
   ${props =>
-    props.active &&
+    props.$active &&
     css`
       background-color: ${colors['brand-600']};
       color: ${colors['brand-50']};
@@ -34,3 +36,44 @@ const FilterButton = styled.button`
     color: ${colors['brand-50']};
   }
 `
+
+function Filter({ filterField, options }) {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  // Validate only one default value
+  useEffect(() => {
+    const defaultOptions = options.filter(option => option.defaultValue)
+    if (defaultOptions.length > 1) {
+      console.warn('Filter component should only have one default option. Using first default option found.')
+    }
+  }, [options])
+
+  function handleClick(value) {
+    searchParams.set(filterField, value)
+    setSearchParams(searchParams)
+  }
+
+  function isActive(value, isDefault) {
+    const currentFilter = searchParams.get(filterField)
+
+    // If no filter is set, first try to use the default option
+    if (!currentFilter) {
+      const defaultOption = options.find(option => option.defaultValue)
+      return defaultOption ? value === defaultOption.value : value === options[0].value
+    }
+
+    return currentFilter === value
+  }
+
+  return (
+    <StyledFilter>
+      {options.map(option => (
+        <FilterButton key={option.value} onClick={() => handleClick(option.value)} $active={isActive(option.value, option.defaultValue)}>
+          {option.label}
+        </FilterButton>
+      ))}
+    </StyledFilter>
+  )
+}
+
+export default Filter
