@@ -13,11 +13,20 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { queryConfig, appConfig } from '@/config/env'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 //1000 * 60
+      staleTime: queryConfig.staleTime,
+      cacheTime: queryConfig.cacheTime,
+      refetchOnWindowFocus: queryConfig.refetchOnWindowFocus,
+      retry: queryConfig.retry,
+      retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000)
+    },
+    mutations: {
+      retry: 1,
+      retryDelay: 1000
     }
   }
 })
@@ -25,7 +34,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {appConfig.enableDevtools && <ReactQueryDevtools initialIsOpen={false} />}
 
       <GlobalStyles />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>

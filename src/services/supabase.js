@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
-export const supabaseUrl = 'https://jnyvwqffkxjrfkxdlvdz.supabase.co'
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+import { supabaseConfig } from '@/config/env'
+
+// Usar configurações centralizadas
+export const supabaseUrl = supabaseConfig.url || 'https://jnyvwqffkxjrfkxdlvdz.supabase.co'
+const supabaseKey = supabaseConfig.key
+
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default supabase
