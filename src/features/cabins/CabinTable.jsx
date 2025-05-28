@@ -4,7 +4,7 @@ import Menus from '@/ui/Menus'
 import Spinner from '@/ui/Spinner'
 import Table from '@/ui/Table'
 import { useSearchParams } from 'react-router-dom'
-import { options } from '@/features/cabins/CabinTableOperations'
+import { options } from '@/features/cabins/cabinFilterOptions'
 
 function CabinTable() {
   const { cabins, isLoading } = useCabins()
