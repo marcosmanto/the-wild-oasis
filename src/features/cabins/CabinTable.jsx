@@ -4,6 +4,7 @@ import Menus from '@/ui/Menus'
 import Spinner from '@/ui/Spinner'
 import Table from '@/ui/Table'
 import { useSearchParams } from 'react-router-dom'
+import { options } from '@/features/cabins/CabinTableOperations'
 
 function CabinTable() {
   const { cabins, isLoading } = useCabins()
@@ -11,7 +12,7 @@ function CabinTable() {
 
   if (isLoading) return <Spinner />
 
-  const filterValue = searchParams.get('discount') || 'all'
+  const filterValue = searchParams.get('discount') || options.find(option => option.defaultValue)?.value
 
   let filteredCabins
   if (filterValue === 'all') filteredCabins = cabins
