@@ -1,12 +1,16 @@
 import Row from '@/ui/Row'
 import Heading from '@/ui/Heading'
+import WarningBox from '@/ui/WarningBox'
 
 function Dashboard() {
   return (
-    <Row type="horizontal">
-      <Heading as="h1">Dashboard</Heading>
-      <p>TEST</p>
-    </Row>
+    <>
+      <WarningBox />
+      <Row type="horizontal">
+        <Heading as="h1">Dashboard</Heading>
+        <p>TEST</p>
+      </Row>
+    </>
   )
 }
 
