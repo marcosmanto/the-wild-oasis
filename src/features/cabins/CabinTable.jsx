@@ -13,11 +13,18 @@ function CabinTable() {
   if (isLoading) return <Spinner />
 
   const filterValue = searchParams.get('discount') || options.find(option => option.defaultValue)?.value
+  const sortBy = searchParams.get('sortBy') || 'name-asc'
 
   let filteredCabins
+  // 1) Filter
   if (filterValue === 'all') filteredCabins = cabins
   if (filterValue === 'no-discount') filteredCabins = cabins?.filter(cabin => cabin.discount === 0)
   if (filterValue === 'with-discount') filteredCabins = cabins?.filter(cabin => cabin.discount > 0)
+
+  // 2) Sort
+  const [field, order] = sortBy.split('-')
+
+  filteredCabins.sort((a, b) => (a[field] - b[field]) * (order === 'asc' ? 1 : -1))
 
   return (
     <Menus>

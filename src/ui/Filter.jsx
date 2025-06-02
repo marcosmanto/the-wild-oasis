@@ -67,11 +67,14 @@ function Filter({ filterField, options }) {
 
   return (
     <StyledFilter>
-      {options.map(option => (
-        <FilterButton key={option.value} onClick={() => handleClick(option.value)} $active={isActive(option.value)}>
-          {option.label}
-        </FilterButton>
-      ))}
+      {options.map(function (option) {
+        const active = isActive(option.value)
+        return (
+          <FilterButton disabled={active} key={option.value} onClick={() => handleClick(option.value)} $active={active}>
+            {option.label}
+          </FilterButton>
+        )
+      })}
     </StyledFilter>
   )
 }
